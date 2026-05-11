@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Search Results for '{{ query }}'</h2>
+
+<div class="video-grid">
+
+{% for video in videos %}
+
+<div class="video-card">
+    <a href="/watch/{{ video.id }}/">
+        <img src="{{ video.thumbnail.url }}">
+        <h3>{{ video.title }}</h3>
+    </a>
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

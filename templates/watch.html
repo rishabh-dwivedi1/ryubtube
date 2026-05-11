@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="watch-container">
+
+    <video controls width="100%">
+        <source src="{{ video.video.url }}" type="video/mp4">
+    </video>
+
+    <h2>{{ video.title }}</h2>
+
+    <p>{{ video.views }} views</p>
+
+    <a href="/like/{{ video.id }}/">
+        <button>Like ({{ video.likes }})</button>
+    </a>
+
+    <p>{{ video.description }}</p>
+
+    <hr>
+
+    <h3>Comments</h3>
+
+    {% if user.is_authenticated %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Comment</button>
+    </form>
+    {% endif %}
+
+    {% for comment in comments %}
+        <div class="comment-box">
+            <strong>{{ comment.user.username }}</strong>
+            <p>{{ comment.text }}</p>
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
